@@ -1,0 +1,36 @@
+<div class = "menu">
+<nav>
+	<ul>
+	  <li><h1 id = "menutitle">TICKETT<img id = "logo" src = "/static/pen1.png" height = 80 width =80></h1></li>
+		<li>
+			{% if request.path == "/" %}
+				<a style = "color:#00a6ff">Home</a></li>
+			{% else %}
+				<a href='/'>Home</a></li>
+			{% endif %}		
+		<li>
+			{% if request.path == "/main" %}
+				<a style = "color:#00a6ff">Events</a></li>
+			{% else %}
+				<a href='/main'>Events</a></li>
+			{% endif %}
+		<li>
+			{% if request.path == "/registration" %}
+				<a style = "color:#00a6ff">Register</a></li>
+			{% else %}
+				<a href='/registration'>Register</a></li>
+			{% endif %}
+	</ul>
+</nav>
+	{% with messages = get_flashed_messages(with_categories = true) %}
+	{% if messages %}
+	{% for category, message in messages %}
+	<div class="alert-{{ category }}" role="alert">
+		<span> {{ message }}</span>
+	</div>
+	{% endfor %}
+
+	{% endif %}
+	{% endwith %}
+</div>
+          

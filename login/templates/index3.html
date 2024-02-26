@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="static/css/stocks.css" type="text/css" charset="utf-8">
+	<script src='static/js/jquery-3.6.3.min.js'></script>
+	<script src='static/js/visual.js'></script>
+	<script src='static/js/tickets.js'></script>
+	<script src='static/js/deleting.js'></script>
+</head>
+<header>{% include "headerlist.html" %}</header>
+
+<body>
+	<div class="box-shadow">
+
+		{% for entry in user %}
+		<h2>{{"Hello "+ entry.username + "!"}}</h2>
+		{% endfor %}
+
+		{% for entry in events %}
+		<div class="ticket">
+			<div class="event-date">
+				<h2>{{(entry.date|string)[8:]}}</h2>
+				<p>{{(entry.date).strftime('%B')}}</p>
+			</div>
+			<div class="event-name">
+				<h2>{{entry.eventname}}</h2>
+			</div>
+			<div class="event-details">
+				<p>{{(entry.date).strftime('%A')}} {{(entry.date).year}} <br /> At
+					{{(entry.time|string)[0:-3]}} for
+					{% if ((entry.duration|string)[0:-6]) == "00" %}
+					{% else %}
+					{% if ((entry.duration|string)[0:-7]) == "0" %}
+					{% if ((entry.duration|string)[1:-6]) == "1" %}
+						{{((entry.duration|string)[1:-6])}}hr
+					{% else %}
+					{{(entry.duration|string)[1:-6]}}hrs
+					{% endif %}
+					{% else %}
+					{{(entry.duration|string)[0:-6]}}hrs
+					{% endif %}
+					{% endif %}
+					{% if (entry.duration|string)[3:-3] == "00" %}
+					{% else %}
+					and
+					{% if (entry.duration|string)[3:-4] == "0" %}
+					{% if ((entry.duration|string)[4:-3]) == "1" %}
+						{{((entry.duration|string)[4:-3])}}min
+						{% else %}
+						{{(entry.duration|string)[4:-3]}}mins
+						{% endif %}
+					{% else %}
+					{{(entry.duration|string)[3:-3]}}mins
+					{% endif %}
+					{% endif %} </p>
+
+				Location: {{(entry.location)}}<br>
+
+				{% for x in tickets if x.event_id == entry.id %}
+
+				
+				{% if entry.ticketsleft == 1 %}
+					{% if now.strftime("%d/%m/%y") < entry.date.strftime("%d/%m/%y") %}
+					<p style="color:red;">{{entry.ticketsleft}} ticket left</p>
+					{% else %}
+					<br>
+					{% endif %}
+				{% else %}
+				
+					{% if now.strftime("%d/%m/%y") < entry.date.strftime("%d/%m/%y") %}
+					{% if entry.ticketsleft == 0 %}
+									<p style="color:red;">FULL</p>
+					{% else %}
+						{% if entry.ticketsleft <= entry.lasttickets %} <p style="color:red;">{{entry.ticketsleft}} tickets left</p>
+					{% else %}
+						<br>
+					{% endif %}
+					{% endif %}
+				{% else %}
+							<br>
+					{% endif %}
+					{% endif %}
+					{% for user in user %}
+					<img src="{{url_for('barcoder',barcode='ean13_barcode'+(user.id)|string+(entry.id)|string+'.svg') }}"
+						style="width: fit-content;">
+					{% endfor %}
+					{% if now.strftime("%d/%m/%y") < entry.date.strftime("%d/%m/%y") %}
+						<a href={{url_for ('deleteticket', eventid=entry.id) }}><button class="ticket-cancel">Cancel your
+							ticket</button></a>
+					{% endif %}
+					{% else %}
+					{% if entry.ticketsleft == 1 %}
+					<p style="color:red;">{{entry.ticketsleft}} ticket left</p>
+					<a href={{url_for ('requestticket', eventid=entry.id) }}><button class="ticket-book"
+						type="submit">Request a ticket</button></a>
+					{% else %}
+						{% if entry.ticketsleft == 0 %}
+									<p style="color:red;">FULL</p>
+						{% else %}
+							{% if entry.ticketsleft <= entry.lasttickets %} <p style="color:red;">{{entry.ticketsleft}}
+							tickets left</p>
+						{% endif %}
+						
+						{% if entry.ticketsleft > 0 and now.strftime("%d/%m/%y") < entry.date.strftime("%d/%m/%y")%}
+						<a href={{url_for ('requestticket', eventid=entry.id) }}><button class="ticket-book"
+								type="submit">Request a ticket</button></a>
+						{% endif %}
+						{% endif %}
+						{% endif %}
+
+						{% endfor %}
+			</div> <!-- end item -->
+		</div> <!-- end item-right -->
+		{% else %}
+		<h1>Sorry, but there appears to be no events. Come back later!</h1>
+		{% endfor %}
+	</div>
+</body>
+
+</html>

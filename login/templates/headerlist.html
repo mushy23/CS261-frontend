@@ -1,0 +1,30 @@
+<div class = "menu">
+<nav>
+	<ul>
+		<li>
+			{% if request.path == "/index3" %}
+				<a style = "color:#00a6ff" href='/index3'>View events</a></li>
+			{% else %}
+				<a href='main'>View events</a></li>
+			{% endif %}
+		<li>
+			{% if request.path == "/cancellations" %}
+				<a style = "color:#00a6ff" href='cancellations'>Cancellations</a></li>
+			{% else %}
+				<a href='cancellations'>Cancellations</a></li>
+			{% endif %}
+		
+		<li><a href='logout'>Logout</a></li>
+	</ul>
+</nav>
+	{% with messages = get_flashed_messages(with_categories = true) %}
+	{% if messages %}
+	{% for category, message in messages %}
+	<div class="alert-{{ category }}" role="alert">
+		<span> {{ message }}</span>
+	</div>
+	{% endfor %}
+
+	{% endif %}
+	{% endwith %}
+          

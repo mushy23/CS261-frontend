@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Lab 1</title>
+    <link rel="stylesheet" href="static/css/main.css" type="text/css" media="all" charset="utf-8">
+    <script src='static/js/jquery-3.6.3.min.js'></script>
+    <script src='static/js/visual.js'></script> 
+    </head>
+    <header>{% include "header.html" %}</header>
+    <body>
+        <div class = "box-shadow">
+        <h1 style="font-size:40px;">Welcome to TICKETT!</h1>
+        <p style = "font-size:25px;">This is a Flask-based ticketing system application. It has the following features</p>
+        <ul>
+            <li>View upcoming events and request tickets</li>
+            <li>Log in to view your personal tickets</li>
+        </ul>
+        <h2>Please enter your details to login:</h2><br>
+        <form action='login' method ='post'>
+            <input type = 'text' name = "name" placeholder="username" style = "font-size:17px;"><br><br>
+            <input type = 'password' name = "password" style = "font-size:17px;"><br><br>
+            <input class = 'button' type = 'submit' value ='Login'>
+        </form><br>
+        <h3>If you are yet to register, please click the button below!:</h3>
+        <a class = 'button' href = 'registration'>Register</a><div><br></div>
+        </div>
+    </body>
+</html>

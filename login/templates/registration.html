@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <title>Register!</title>
+    <link rel="stylesheet" href="static/css/main.css" type="text/css"
+charset="utf-8">
+    <script src='static/js/jquery-3.6.3.min.js'></script>
+    <script src='static/js/registration.js'></script>
+  </head>
+  <footer>{% include "header.html" %}</footer>
+  <body>
+      <div class = "box-shadow">
+      <h1>Thanks for considering us! Please fill in your details below:</h1>
+        <form action = '\registeruser' method = 'post' style = "font-size:20px;">
+          <!--
+            Title: <select name ='title'>
+                <option value = 'Dr'>Dr</option>
+                <option value = 'Mr'>Mr</option>
+                <option value = 'Ms'>Ms</option>
+                <option value = 'Miss'>Miss</option>
+            </select><br><br>
+            First name: <input type = "text" name = "firstname"><br><br>
+            Last name: <input type = "text" name = "lastname"><br><br>
+            -->
+            Username: <input id = "username" type = "text" placeholder = "username" name = "username" style = "font-size:17px;"><br><br>
+            Password: <input id = "password" type = 'password' name = "user_password" style = "font-size:17px;"><br><br>
+            Organiser Code: <input type = 'text' name = "code" style = "font-size:17px;"><br><br>
+            Email: <input id = "email" type = 'email' name="email" style = "font-size:17px;"><br><br>
+            DOB: <input id = "dob" type = 'date' name = 'dob' style = "font-size:17px;"><br><br>
+            <input id = 'submit' type = 'submit' value = Register class = 'button'>
+        </form>
+      </div>
+  </body>
+  <footer></footer>
+</html>

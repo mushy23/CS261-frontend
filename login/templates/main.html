@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/stocks.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+    <script src="static/js/myscripts.js"></script> 
+    <title>Project</title>
+</head>
+<body>
+
+    <div class="topnav">
+        <a class="active" onclick="openNav()">≡</a>
+        <p>Company name</p>
+        <header>{% include "headerlist.html" %}</header>
+    </div> 
+
+    <!-- <header>{% include "headerlist.html" %}</header> -->
+
+    <div id="mySidenav" class="sidenav">
+        <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
+        <a>Followed Companies</a>
+        <br>
+        <div class="wrap2">
+
+                <main>
+                    <a href="/compname">yo</a>
+                    <a href="/compname"></a>
+                    <a href="/compname"></a>
+                    <a href="/compname"></a>
+                    <a href="/compname"></a>
+                    <a href="/compname"></a>
+                    <a href="/compname"></a>
+                    <a href="/compname"></a>
+                </main>
+                
+            </div>
+      </div>
+
+    <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
+    <div id="main">
+        <br>
+        <br>
+
+            <div class="wrap" id="wrap" onscroll="doSomething()">
+            
+                <header class="top-header">
+                <!--<span class="menu-icon">User</span>-->
+                </header>
+                
+                <div class="search">
+                <input type="search" placeholder="Search for a company" />
+                </div>
+                
+                <div class="top">
+                <div class ="hero"><img src="static/logo.png" alt="Image" width="165" height = '100'></div>
+                </div>
+
+
+                <h2>Trending companies:</h2>
+                <div class = "companyboxwrap">
+                    {% for comp in companies %}
+                    <div class="companybox">
+                      <a href="/compname">
+                        <div class="compboxcontent">
+                        <div class="companyboxmaincontent">
+                        <a href="/compname" class = "companyboxname">{{comp.companyName}}</a>
+                        </div>
+                        <h2>{{comp.stockID}}</h2>
+                          <h3>97.8</h3>
+                          <p>4.5%</p>
+                        </div>
+                        </a>
+                        <a href="your_app_route_here" class="add-button">+</a>
+                      </div>
+                      {% endfor %}
+                    </div>
+      
+
+                <main>
+                    <h2>Trending stories:</h2>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </main>
+                
+            </div>
+    </div>
+
+    
+
+    
+</body>
+
+{% with messages = get_flashed_messages(with_categories = true) %}
+{% if messages %}
+{% for category, message in messages %}
+<div class="alert-{{ category }}" role="alert">
+    <span> {{ message }}</span>
+</div>
+{% endfor %}
+
+{% endif %}
+{% endwith %}
+
+</html>
